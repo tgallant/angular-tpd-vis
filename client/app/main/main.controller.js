@@ -77,9 +77,9 @@ angular.module('angularTpdVisApp')
 };
 };
 
-$scope.map = 
-{ 
-  center: { 
+$scope.map =
+{
+  center: {
     latitude: 32.2317,
     longitude: -110.9519
   },
