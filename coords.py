@@ -21,8 +21,9 @@ p = Proj("+init=EPSG:6405")
 feet_to_meter = 0.3048
 
 for index, line in enumerate(f):
-    x, y = line.strip().split(",")
+    fields = line.strip().split(",")
     try:
+        x, y = fields[24:26]
         x = float(x)
         y = float(y)
         lat, lon = p(x*feet_to_meter, y*feet_to_meter, inverse=True)
@@ -32,6 +33,10 @@ for index, line in enumerate(f):
         lat, lon = 0,0
         if verbose:
             sys.stderr.write("Couldn't convert '%s' at 0-based index %d\n" % (line, index))
-    print('%f, %f' % (lat, lon))
+        # Just throw them out
+        continue
+    fields[24] = str(lat)
+    fields[25] = str(lon)
+    print(",".join(fields))
 
 
