@@ -27,7 +27,7 @@ angular.module('angularTpdVisApp')
             .attr("class", "marker");
 
             marker.append("svg:circle")
-            .attr("r", 300)
+            .attr("r", 4.5)
             .attr("cx", padding)
             .attr("cy", padding);
 
