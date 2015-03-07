@@ -1,4 +1,7 @@
 <div class="col-md-12">
-<p>{{csv}}</p>
-<p ng-repeat="obj in csv">{{obj.DATE_OCC}}</p>
+<div ng-repeat="key in keys">
+{{key}}
+<input ng-model="search[key]">
+</div>
+<p ng-repeat="obj in data | filter:search">{{obj.DATE_OCCU}}</p>
 </div>
