@@ -8,7 +8,7 @@ angular.module('angularTpdVisApp')
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
       if($scope.itemsLoaded == 0) {
-        d3.json("/api/incidents?limit=500", function(data) {
+        d3.json("/api/incidents?limit=10000", function(data) {
           data = data.data;
         // console.log(data);
 
@@ -55,9 +55,9 @@ angular.module('angularTpdVisApp')
 };
 };
 
-$scope.map = 
-{ 
-  center: { 
+$scope.map =
+{
+  center: {
     latitude: 32.2317,
     longitude: -110.9519
   },
