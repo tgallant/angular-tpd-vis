@@ -22,3 +22,7 @@
   stroke: black;
   stroke-width: 1.5px;
 }
+
+svg:not(:root) {
+    overflow: visible !important;
+}
