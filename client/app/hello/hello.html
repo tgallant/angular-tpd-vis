@@ -1,0 +1,5 @@
+<div class="col-md-12">
+<label>NameLabel</label><input ng-model="search.name"><br/>
+<label>AgeLabel</label><input ng-model="search.age">
+<p ng-repeat="aName in names|filter:search">Hello {{aName.name}}</p>
+</div>
