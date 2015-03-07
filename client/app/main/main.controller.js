@@ -5,9 +5,9 @@ angular.module('angularTpdVisApp')
 
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
-      d3.json("/api/incidents", function(data) {
-
-        var data = [{latitude: 32.2317,longitude: -110.9519}, {latitude: 32.237049, longitude: -110.979671}];
+      d3.json("/api/incidents?limit=50", function(data) {
+        data = data.data;
+        console.log(data);
 
         var overlay = new maps.OverlayView();
 
@@ -38,10 +38,8 @@ angular.module('angularTpdVisApp')
             .text(function(d) { return d.key; });
 
             function transform(d) {
-              console.log(d);
-              d = new maps.LatLng(d.latitude, d.longitude);
+              d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
               d = projection.fromLatLngToDivPixel(d);
-              console.log(d);
               return d3.select(this)
               .style("left", (d.x - padding) + "px")
               .style("top", (d.y - padding) + "px");
