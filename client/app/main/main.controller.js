@@ -74,43 +74,44 @@ angular.module('angularTpdVisApp')
         overlay.setMap(map);
         $scope.itemsLoaded = 1;
       });
-};
-};
+    };
+  };
 
-$scope.map =
-{
-  center: {
-    latitude: 32.2317,
-    longitude: -110.9519
-  },
-  zoom: 12,
-  events: {
-    tilesloaded: function (map) {
-      makeOverlay(map);
+  $scope.map =
+  {
+    center: {
+      latitude: 32.2317,
+      longitude: -110.9519
+    },
+    zoom: 12,
+    events: {
+      tilesloaded: function (map) {
+        makeOverlay(map);
+      }
     }
-  }
-};
+  };
 
-$scope.mapStyles = [
-{
-  stylers: [
-  { hue: "#00ffe6" },
-  { saturation: -20 }
-  ]
-},{
-  featureType: "road",
-  elementType: "geometry",
-  stylers: [
-  { lightness: 100 },
-  { visibility: "simplified" }
-  ]
-},{
-  featureType: "road",
-  elementType: "labels",
-  stylers: [
-  { visibility: "off" }
-  ]
-}
-];
-});
+  $scope.mapStyles = [
+    {
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -20 }
+      ]
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },
+    {
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }];
+  });
 });
