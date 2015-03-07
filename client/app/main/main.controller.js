@@ -87,7 +87,6 @@ angular.module('angularTpdVisApp')
       }
     };
 
-<<<<<<< HEAD
 $scope.mapStyles = [
 {
   stylers: [
