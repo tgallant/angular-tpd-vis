@@ -1,37 +1,15 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
-
-  $scope.itemsLoaded = 0;
+.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
 
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
-      if($scope.itemsLoaded == 0) {
-        d3.json("/api/incidents?limit=500", function(data) {
+      incidents.getIncidents(10000).then(function(data) {
+      // d3.json("/api/incidents?limit=10000", function(data) {
         data = data.data;
+        console.log(data);
 
-        var colorScale = d3.scale.category20().domain(
-            [
-            "ACCIDENT",
-            "FOR DISPACCADVEV",
-            "INCIDENT",
-            "FOR DISPASSNCASE",
-            "SUPPLEMENT",
-            "INCIDENT/ARREST",
-            "CRIMESCENE WORKED",
-            "INCIDENT/ACCIDENT",
-            "ACCIDENT",
-            "FIELD INTERVIEW",
-            "MISC INCIDENT",
-            "TRAFFIC CITATION",
-            "NO PAPERWORK",
-            "FALSE ALARM",
-            "CITATION ARREST",
-            "TRANSPORT WORKED",
-            "ERROR/SHELL NOT NEEDED"
-            ]);
-        
         var overlay = new maps.OverlayView();
 
         overlay.onAdd = function() {
@@ -50,11 +28,9 @@ angular.module('angularTpdVisApp')
             .attr("class", "marker");
 
             marker.append("svg:circle")
-            .attr("r", 2)
+            .attr("r", 4.5)
             .attr("cx", padding)
-            .attr("cy", padding)
-            .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
-            .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); });
+            .attr("cy", padding);
 
             marker.append("svg:text")
             .attr("x", padding + 7)
@@ -72,9 +48,7 @@ angular.module('angularTpdVisApp')
           };
         };
         overlay.setMap(map);
-        $scope.itemsLoaded = 1;
       });
-};
 };
 
 $scope.map =
