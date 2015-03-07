@@ -8,7 +8,9 @@ angular.module('angularTpdVisApp')
       var deferred = $q.defer();
       if(data === false) {
         d3.json("/api/incidents?limit="+limit, function(result) {
-          data = result.data;
+          data = result;
+
+          console.log(data);
           deferred.resolve(data);
         });
       }else{
