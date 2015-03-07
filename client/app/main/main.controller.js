@@ -95,7 +95,13 @@ $scope.mapStyles = [
 {
   stylers: [
   { hue: "#00ffe6" },
-  { saturation: -20 }
+  { saturation: -100 }
+  ]
+},{
+  featureType: "all",
+  elementType: "all", 
+  stylers: [
+  { visibility: "off" }
   ]
 },{
   featureType: "road",
@@ -107,6 +113,12 @@ $scope.mapStyles = [
 },{
   featureType: "road",
   elementType: "labels",
+  stylers: [
+  { visibility: "on" }
+  ]
+},{
+  featureType: "road.all",
+  elementType: "labels.text",
   stylers: [
   { visibility: "off" }
   ]
