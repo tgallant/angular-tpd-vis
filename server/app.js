@@ -9,6 +9,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
 var mongoose = require('mongoose');
+var paginate = require('express-paginate');
 var config = require('./config/environment');
 
 // Connect to database
@@ -19,6 +20,7 @@ if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
+app.use(paginate.middleware(10, 50));
 var server = require('http').createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,
