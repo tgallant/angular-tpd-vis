@@ -3,11 +3,14 @@
 angular.module('angularTpdVisApp')
 .controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
 
+  $scope.itemsLoaded = 0;
+
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
-      d3.json("/api/incidents?limit=50", function(data) {
-        data = data.data;
-        console.log(data);
+      if($scope.itemsLoaded == 0) {
+        d3.json("/api/incidents?limit=500", function(data) {
+          data = data.data;
+        // console.log(data);
 
         var overlay = new maps.OverlayView();
 
@@ -27,7 +30,7 @@ angular.module('angularTpdVisApp')
             .attr("class", "marker");
 
             marker.append("svg:circle")
-            .attr("r", 4.5)
+            .attr("r", 2)
             .attr("cx", padding)
             .attr("cy", padding);
 
@@ -47,7 +50,9 @@ angular.module('angularTpdVisApp')
           };
         };
         overlay.setMap(map);
+        $scope.itemsLoaded = 1;
       });
+};
 };
 
 $scope.map = 
