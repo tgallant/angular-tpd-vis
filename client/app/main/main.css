@@ -1,7 +1,26 @@
 .angular-google-map-container {
     position: absolute;
-    top: 100px;
+    top: 0;
     left: 0;
-    bottom: 100px;
+    bottom: 0;
     right: 0;
+}
+
+.stations, .stations svg {
+  position: absolute;
+}
+
+.stations svg {
+  width: 60px;
+  height: 20px;
+  padding-right: 100px;
+  font: 10px sans-serif;
+}
+
+.stations circle {
+  stroke-width: 1.5px;
+}
+
+svg:not(:root) {
+    overflow: visible !important;
 }
