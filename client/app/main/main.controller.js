@@ -7,7 +7,7 @@ angular.module('angularTpdVisApp')
     var makeOverlay = function(map) {
       d3.json("/api/incidents", function(data) {
 
-        var data = [{latitude: 32.2317,longitude: -110.9519}];
+        var data = [{latitude: 32.2317,longitude: -110.9519}, {latitude: 32.237049, longitude: -110.979671}];
 
         var overlay = new maps.OverlayView();
 
