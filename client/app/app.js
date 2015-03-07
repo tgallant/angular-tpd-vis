@@ -7,6 +7,7 @@ angular.module('angularTpdVisApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
+  'smart-table',
   'uiGmapgoogle-maps'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, uiGmapGoogleMapApiProvider) {
