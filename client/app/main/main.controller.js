@@ -5,10 +5,30 @@ angular.module('angularTpdVisApp')
 
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
-      incidents.getIncidents(10000).then(function(data) {
-      // d3.json("/api/incidents?limit=10000", function(data) {
+      incidents.getIncidents(500).then(function(data) {
         data = data.data;
         console.log(data);
+
+        var colorScale = d3.scale.category20().domain(
+          [
+          "ACCIDENT",
+          "FOR DISPACCADVEV",
+          "INCIDENT",
+          "FOR DISPASSNCASE",
+          "SUPPLEMENT",
+          "INCIDENT/ARREST",
+          "CRIMESCENE WORKED",
+          "INCIDENT/ACCIDENT",
+          "ACCIDENT",
+          "FIELD INTERVIEW",
+          "MISC INCIDENT",
+          "TRAFFIC CITATION",
+          "NO PAPERWORK",
+          "FALSE ALARM",
+          "CITATION ARREST",
+          "TRANSPORT WORKED",
+          "ERROR/SHELL NOT NEEDED"
+          ]);
 
         var overlay = new maps.OverlayView();
 
@@ -28,9 +48,11 @@ angular.module('angularTpdVisApp')
             .attr("class", "marker");
 
             marker.append("svg:circle")
-            .attr("r", 4.5)
+            .attr("r", 2)
             .attr("cx", padding)
-            .attr("cy", padding);
+            .attr("cy", padding)
+            .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
+            .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); });
 
             marker.append("svg:text")
             .attr("x", padding + 7)
@@ -49,22 +71,23 @@ angular.module('angularTpdVisApp')
         };
         overlay.setMap(map);
       });
-};
+    };
 
-$scope.map =
-{
-  center: {
-    latitude: 32.2317,
-    longitude: -110.9519
-  },
-  zoom: 12,
-  events: {
-    tilesloaded: function (map) {
-      makeOverlay(map);
-    }
-  }
-};
+    $scope.map =
+    {
+      center: {
+        latitude: 32.2317,
+        longitude: -110.9519
+      },
+      zoom: 12,
+      events: {
+        tilesloaded: function (map) {
+          makeOverlay(map);
+        }
+      }
+    };
 
+<<<<<<< HEAD
 $scope.mapStyles = [
 {
   stylers: [
