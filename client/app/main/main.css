@@ -1,1 +1,7 @@
-.angular-google-map-container { height: 100%; }
+.angular-google-map-container {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    bottom: 100px;
+    right: 0;
+}
