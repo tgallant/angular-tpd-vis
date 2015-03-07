@@ -1,37 +1,35 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
-
-  $scope.itemsLoaded = 0;
+.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
 
   uiGmapGoogleMapApi.then(function(maps) {
     var makeOverlay = function(map) {
-      if($scope.itemsLoaded == 0) {
-        d3.json("/api/incidents?limit=500", function(data) {
+      incidents.getIncidents(500).then(function(data) {
         data = data.data;
+        console.log(data);
 
         var colorScale = d3.scale.category20().domain(
-            [
-            "ACCIDENT",
-            "FOR DISPACCADVEV",
-            "INCIDENT",
-            "FOR DISPASSNCASE",
-            "SUPPLEMENT",
-            "INCIDENT/ARREST",
-            "CRIMESCENE WORKED",
-            "INCIDENT/ACCIDENT",
-            "ACCIDENT",
-            "FIELD INTERVIEW",
-            "MISC INCIDENT",
-            "TRAFFIC CITATION",
-            "NO PAPERWORK",
-            "FALSE ALARM",
-            "CITATION ARREST",
-            "TRANSPORT WORKED",
-            "ERROR/SHELL NOT NEEDED"
-            ]);
-        
+          [
+          "ACCIDENT",
+          "FOR DISPACCADVEV",
+          "INCIDENT",
+          "FOR DISPASSNCASE",
+          "SUPPLEMENT",
+          "INCIDENT/ARREST",
+          "CRIMESCENE WORKED",
+          "INCIDENT/ACCIDENT",
+          "ACCIDENT",
+          "FIELD INTERVIEW",
+          "MISC INCIDENT",
+          "TRAFFIC CITATION",
+          "NO PAPERWORK",
+          "FALSE ALARM",
+          "CITATION ARREST",
+          "TRANSPORT WORKED",
+          "ERROR/SHELL NOT NEEDED"
+          ]);
+
         var overlay = new maps.OverlayView();
 
         overlay.onAdd = function() {
@@ -72,24 +70,22 @@ angular.module('angularTpdVisApp')
           };
         };
         overlay.setMap(map);
-        $scope.itemsLoaded = 1;
       });
     };
-  };
 
-  $scope.map =
-  {
-    center: {
-      latitude: 32.2317,
-      longitude: -110.9519
-    },
-    zoom: 12,
-    events: {
-      tilesloaded: function (map) {
-        makeOverlay(map);
+    $scope.map =
+    {
+      center: {
+        latitude: 32.2317,
+        longitude: -110.9519
+      },
+      zoom: 12,
+      events: {
+        tilesloaded: function (map) {
+          makeOverlay(map);
+        }
       }
-    }
-  };
+    };
 
   $scope.mapStyles = [
     {
