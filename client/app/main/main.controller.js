@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
+.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
 
   $scope.itemsLoaded = 0;
 
