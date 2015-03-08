@@ -7,7 +7,7 @@ angular.module('angularTpdVisApp')
     var makeOverlay = function(map) {
       incidents.getIncidents(500).then(function(data) {
         data = data.data;
-        console.log(data);
+        console.log(maps.UnitSystem);
 
         var colorScale = d3.scale.category20().domain(
           [
@@ -39,6 +39,9 @@ angular.module('angularTpdVisApp')
           overlay.draw = function() {
             var projection = this.getProjection(),
             padding = 10;
+
+            center = {latitude: 32.2317, longitude: -110.9519};
+            
 
             var marker = layer.selectAll("svg")
             .data(data)
