@@ -10,12 +10,25 @@ exports.index = function(req, res, next) {
 
     if (err) return next(err);
 
+    console.log(req.query.all);
+
+    var resArray = [];
+
+    for(var x = 0; x < incidents.length; x++) {
+      var incident = {};
+      incident.LONGITUDE = incidents[x].LONGITUDE;
+      incident.LATITUDE = incidents[x].LATITUDE;
+      incident.CSDISPDESC = incidents[x].CSDISPDESC;
+      console.log(incident);
+      resArray.push(incident);
+    }
+
     res.format({
       json: function() {
         res.json({
           object: 'list',
           has_more: paginate.hasNextPages(req)(pageCount),
-          data: incidents
+          data: req.query.all ? incidents : resArray
         });
       }
     });
