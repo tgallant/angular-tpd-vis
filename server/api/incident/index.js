@@ -5,7 +5,7 @@ var controller = require('./incident.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/', controller.interval);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
