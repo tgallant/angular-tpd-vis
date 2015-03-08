@@ -1,19 +1,12 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
+<<<<<<< HEAD
+.controller('HomeCtrl', function ($scope) {
+=======
   .controller('HomeCtrl', function ($scope, $rootScope) {
 
     $rootScope.date = "";
+>>>>>>> 037835be48775854447532f06d67b58527d1c884
     $scope.message = 'Hello';
-    $scope.awesomeThings = [
-    {
-    name: 'Source', 
-    link:'http://data.tucsonaz.gov',
-    info:'A big thanks to the City of Tucson.'
-    },
-    {
-    name: 'D3',
-    link: 'http://d3js.org',
-    },
-    ];
-  });
+});
