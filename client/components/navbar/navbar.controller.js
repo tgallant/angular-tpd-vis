@@ -5,20 +5,20 @@ angular.module('angularTpdVisApp')
     $scope.menu = [
     {
       'title': 'Home',
-      'link': '/home'
+      'link': '/'
+    },
+    {
+      'title': 'Time Lapse',
+      'link': '/main'
+    },
+    {
+      'title': 'Traffic Citations',
+      'link': '/temp1'
     },
     {
       'title': 'Table',
       'link': '/table'
     },
-    {
-      'title': 'Time Lapse',
-      'link': '/'
-    },
-    {
-      'title': 'Traffic',
-      'link': '/temp1'
-    }
     ];
 
     $scope.isCollapsed = true;

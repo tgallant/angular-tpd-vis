@@ -30,7 +30,6 @@ uiGmapGoogleMapApi.then(function(maps) {
     var overlay = new maps.OverlayView();
 
     function processData(map, data, overlay, dateRept) {
-      console.log(data.length);
 
       overlay.onAdd = function() {
         var layer = d3.select(overlay.getPanes().overlayMouseTarget).append("div")
@@ -69,7 +68,7 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("x", padding + 7)
           .attr("y", padding)
           .attr("dy", ".31em")
-          .text(function(d) { return d.CSDISPDESC; });
+          .text(function(d) { return d.CSDISPDESC === "None" ? "" : d.CSDISPDESC; });
 
           function transform(d, i) {
             d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
