@@ -97,7 +97,6 @@ uiGmapGoogleMapApi.then(function(maps) {
     var overlay = new maps.OverlayView();
 
     function processData(map, data, overlay) {
-      data = data.data;
 
       overlay.onAdd = function() {
         var layer = d3.select(overlay.getPanes().overlayLayer).append("div")
@@ -128,7 +127,7 @@ uiGmapGoogleMapApi.then(function(maps) {
           marker.append("svg:text")
           .attr("x", padding + 7)
           .attr("y", padding)
-          .attr("dy", ".31em");
+          .attr("dy", ".31em")
           .text(function(d) { return d.CSDISPDESC; });
 
           function transform(d, i) {
@@ -141,9 +140,9 @@ uiGmapGoogleMapApi.then(function(maps) {
         };
       };
       overlay.setMap(map);
-      setTimeout(function() { incidents.getIncidents(1000/*,minDate + 1*/).then(function(data) { processData(map, data, new maps.OverlayView()); }); }, 5000);
+      setTimeout(function() { incidents.getIncidents(1000, "2015-01-01"/*minDate+1*/).then(function(data) { processData(map, data, new maps.OverlayView()); }); }, 5000);
     };
-    incidents.getIncidents(1000/*, minDate*/).then(function(data) { processData(map, data, overlay); });
+    incidents.getIncidents(1000, "2015-01-01"/*minDate*/).then(function(data) { processData(map, data, overlay); });
 };
 
 $scope.map =
