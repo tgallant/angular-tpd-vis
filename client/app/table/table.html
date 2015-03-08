@@ -3,62 +3,60 @@
 	<table st-table="displayedCollection" st-safe-src="things" class="table table-striped">
 
 		<thead>
-			<tr><td colspan="3"><input st-search="" class="form-control" placeholder="Search Table" type="text"/></td></tr>
-			<tr>
-				<th>Counter</th>
-				<th ng-repeat="item in tableHeaders" st-sort="'{{item[0]}}'">{{item[1]}}</th>
-			</tr>
-			<tr>
-				<th></th>
-				<th ng-repeat="item in tableHeaders"><input st-search="'{{item[0]}}'" class="form-control" placeholder="{{item[1]}}" type="text" ng-model="item[0]" /></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="row in displayedCollection" ng-init="counter=1">
-				<td>{{$counter+1}}</td>
-				<td>{{row.PRIMARYKEY}}</td>
-				<td>{{row.INCI_ID}}</td>
-				<td>{{row.CALL_ID}}</td>
-				<td>{{row.ADDRESS_PUBLIC}}</td>
-				<td>{{row.DATE_REPT}}</td>
-				<td>{{row.HOUR_REPT}}</td>
-				<td>{{row.DATE_OCCU}}</td>
-				<td>{{row.HOUR_OCCU}}</td>
-				<td>{{row.DATE_FND}}</td>
-				<td>{{row.HOUR_FND}}</td>
-				<td>{{row.NEIGHBORHD}}</td>
-				<td>{{row.AGENCY}}</td>
-				<td>{{row.OFFENSE}}</td>
-				<td>{{row.STATUSDESC}}</td>
-				<td>{{row.CAPRIORITY}}</td>
-				<td>{{row.NATURECODE}}</td>
-				<td>{{row.NATURECODEDESC}}</td>
-				<td>{{row.HOWRECEIVE}}</td>
-				<td>{{row.CSDISPOSIT}}</td>
-				<td>{{row.CSDISPDESC}}</td>
-				<td>{{row.ACTDATE}}</td>
-				<td>{{row.ACTTIME}}</td>
-				<td>{{row.EMDIVISION}}</td>
-				<td>{{row.EMUNIT}}</td>
-				<td>{{row.X}}</td>
-				<td>{{row.Y}}</td>
-				<td>{{row.ADDUSER}}</td>
-				<td>{{row.APPSTATE}}</td>
-				<td>{{row.ADDTIME}}</td>
-				<td>{{row.LOC_METHOD}}</td>
-				<td>{{row.ADD_NS}}</td>
-				<td>{{row.ADD_DIR_NS}}</td>
-				<td>{{row.ADD_EW}}</td>
-				<td>{{row.ADD_DIR_EW}}</td>
-				<td>{{row.NHA_NAME}}</td>
+			<tr><td colspan="5"><input st-search="" class="form-control" placeholder="Global Search" type="text"/></td></tr>
+			<th>Counter</th>
+			<th ng-repeat="item in tableHeaders" st-sort="'{{item[0]}}'">{{item[1]}}</th>
+		</tr>
+		<tr>
+			<th></th>
+			<th><input st-search="'ADDRESS_PUBLIC'" class="form-control" placeholder="{{tableHeaders[0][1]}}" type="text" /></th>
+			<th><input st-search="'DATE_REPT'" class="form-control" placeholder="{{tableHeaders[1][1]}}" type="text" /></th>
+			<th><input st-search="'HOUR_REPT'" class="form-control" placeholder="{{tableHeaders[2][1]}}" type="text" /></th>
+			<th><input st-search="'DATE_OCCU'" class="form-control" placeholder="{{tableHeaders[3][1]}}" type="text" /></th>
+			<th><input st-search="'HOUR_OCCU'" class="form-control" placeholder="{{tableHeaders[4][1]}}" type="text" /></th>
+			<th><input st-search="'NatureCodeDesc'" class="form-control" placeholder="{{tableHeaders[5][1]}}" type="text" /></th>
+			<th><input st-search="'CSDISPDESC'" class="form-control" placeholder="{{tableHeaders[6][1]}}" type="text" /></th>
+			<th><input st-search="'ACTDATE'" class="form-control" placeholder="{{tableHeaders[7][1]}}" type="text" /></th>
+			<th><input st-search="'ACTTIME'" class="form-control" placeholder="{{tableHeaders[8][1]}}" type="text" /></th>
+			<th><input st-search="'ADD_NS'" class="form-control" placeholder="{{tableHeaders[9][1]}}" type="text" /></th>
+			<th><input st-search="'AADD_DIR_NS'" class="form-control" placeholder="{{tableHeaders[10][1]}}" type="text" /></th>
+			<th><input st-search="'ADD_EW'" class="form-control" placeholder="{{tableHeaders[11][1]}}" type="text" /></th>
+			<th><input st-search="'ADD_DIR_EW'" class="form-control" placeholder="{{tableHeaders[12][1]}}" type="text" /></th>
+			<th><input st-search="'NHA_NAME'" class="form-control" placeholder="{{tableHeaders[13][1]}}" type="text" /></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in displayedCollection" >
+			<td>{{$index+1}}</td>
+			<td>{{row.ADDRESS_PUBLIC}}</td>
+			<td>{{row.DATE_REPT | date}}</td>
+			<td>{{row.HOUR_REPT}}</td>
+			<td>{{row.DATE_OCCU | date}}</td>
+			<td>{{row.HOUR_OCCU}}</td>
+			<td>{{row.NatureCodeDesc}}</td>
+			<td>{{row.CSDISPDESC}}</td>
+			<td>{{row.ACTDATE | date}}</td>
+			<td>{{row.ACTTIME}}</td>
+			<td>{{row.ADD_NS}}</td>
+			<td>{{row.ADD_DIR_NS}}</td>
+			<td>{{row.ADD_EW}}</td>
+			<td>{{row.ADD_DIR_EW}}</td>
+			<td>{{row.NHA_NAME}}</td>
 
-				<td>
-					<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-						<i class="glyphicon glyphicon-remove-circle">
-						</i>
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+			<td>
+				<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove-circle">
+					</i>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="5" class="text-center">
+				<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>
 </div>

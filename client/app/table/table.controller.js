@@ -10,36 +10,16 @@ myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
     		$scope.things.splice(index, 1);
     	}
     }
-    $scope.tableHeaders = [	['PRIMARYKEY', ' '], 
-    ['INCI_ID', 'Incident ID'], 
-    ['CALL_ID', 'Call ID'], 
+    $scope.tableHeaders = [	
     ['ADDRESS_PUBLIC', 'Public Address'], 
     ['DATE_REPT', 'Date Rported'], 
     ['HOUR_REPT', 'Hour Reported'], 
     ['DATE_OCCU', 'Date Occcured'], 
     ['HOUR_OCCU', 'Hour Occured'], 
-    ['DATE_FND', 'Date Discovered'], 
-    ['HOUR_FND', 'Hour Discoverd'], 
-    ['NEIGHBORHD', 'Neigborhood'], 
-    ['AGENCY', 'Agency'], 
-    ['OFFENSE', 'Offense'], 
-    ['STATUSDESC', 'Initial Description'], 
-    ['CAPRIORITY', 'Call Priority'], 
-    ['NATURECODE', 'Event Type Code'], 
-    ['NATURECODEDESC', 'Code Description'], 
-    ['HOWRECEIVE', 'Method of service'], 
-    ['CSDISPOSIT', 'Disposition Code'], 
+    ['NatureCodeDesc', 'Code Description'], 
     ['CSDISPDESC', 'Description of Disp. Code'], 
     ['ACTDATE', 'Actual Date'], 
     ['ACTTIME', 'Actual Time'], 
-    ['EMDIVISION', 'Officer\'s Divison'], 
-    ['EMUNIT', 'Officer\'s Unit'], 
-    ['X', 'X coordinate'], 
-    ['Y', 'Y coordiante'], 
-    ['ADDUSER', 'Add user'], 
-    ['APPSTATE', ' '], 
-    ['ADDTIME', ' '], 
-    ['LOC_METHOD', 'Location Mehtod'], 
     ['ADD_NS', 'North South Address'], 
     ['ADD_DIR_NS', 'N/S Address Number'], 
     ['ADD_EW', 'East West Address'], 
@@ -47,7 +27,7 @@ myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
     ['NHA_NAME', 'Neigborhood Name'], ];
     $scope.things = [];
 
-    $http.get('/api/incidents?limit=50')
+    $http.get('/api/incidents?limit=10000')
     .success(function(data, status, headers, config){
     	$scope.things = data.data;
 
