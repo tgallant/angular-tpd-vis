@@ -16,6 +16,7 @@ exports.index = function(req, res, next) {
 
     for(var x = 0; x < incidents.length; x++) {
       var incident = {};
+      incident._id = incidents[x]._id;
       incident.LONGITUDE = incidents[x].LONGITUDE;
       incident.LATITUDE = incidents[x].LATITUDE;
       incident.CSDISPDESC = incidents[x].CSDISPDESC;
