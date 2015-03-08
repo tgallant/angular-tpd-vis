@@ -28,3 +28,11 @@
 svg:not(:root) {
     overflow: visible !important;
 }
+
+svg text {
+    visibility: hidden;
+}
+
+svg:hover text {
+    visibility: visible;
+}
