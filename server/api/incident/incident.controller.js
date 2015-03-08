@@ -19,7 +19,6 @@ exports.index = function(req, res, next) {
       incident.LONGITUDE = incidents[x].LONGITUDE;
       incident.LATITUDE = incidents[x].LATITUDE;
       incident.CSDISPDESC = incidents[x].CSDISPDESC;
-      console.log(incident);
       resArray.push(incident);
     }
 
