@@ -37,7 +37,7 @@ exports.interval = function(req, res){
   var lim = req.query.lim;
   console.log(req.query.lim);
   if(!req.query.lim){
-    lim = 2;
+    lim = req.query.lim;
   }
   Incident.find( {"DATE_OCCU": {"$gte": new Date(req.query.start), "$lte": new Date(req.query.end)}})
   .limit(lim)
