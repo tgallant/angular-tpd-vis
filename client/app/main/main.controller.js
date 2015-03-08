@@ -53,6 +53,7 @@ angular.module('angularTpdVisApp')
   .enter().append("rect")
   .attr("height", p.cellHeight)
   .attr("x", function(d, i) { return x(i); })
+  .attr("y", 0)
   .attr("width", function(d) { return p.cellWidth; })
   .style("fill", function(d, i)
   {
@@ -88,6 +89,7 @@ var colorScale = d3.scale.category20().domain(
   "TRANSPORT WORKED",
   "ERROR/SHELL NOT NEEDED"
   ]);
+appendOrdinalHorizontalLegend(d3.select("body"), colorScale.domain());
 
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
@@ -121,8 +123,8 @@ uiGmapGoogleMapApi.then(function(maps) {
           marker.append("svg:text")
           .attr("x", padding + 7)
           .attr("y", padding)
-          .attr("dy", ".31em")
-          .text(function(d) { return d.key; });
+          .attr("dy", ".31em");
+          //.text(function(d) { return d.CSDISPDESC; });
 
           function transform(d) {
             d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
@@ -131,6 +133,7 @@ uiGmapGoogleMapApi.then(function(maps) {
             .style("left", (d.x - padding) + "px")
             .style("top", (d.y - padding) + "px");
           };
+          console.log(d3.selectAll("circle"));
         };
       };
       overlay.setMap(map);
@@ -150,6 +153,11 @@ $scope.map =
     }
   }
 };
+
+setInterval(function() {
+    d3.selectAll("circle").style("opacity", 1);
+    d3.selectAll("circle").transition().duration(4900).style("opacity", .1);
+}, 5000);
 
 $scope.mapStyles = [
 {
