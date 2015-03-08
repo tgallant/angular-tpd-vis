@@ -2,24 +2,29 @@
 
 angular.module('angularTpdVisApp')
   .factory('incidents', function ($http, $q) {
-    var data = false;
 
     function getIncidents (limit, date) {
       var deferred = $q.defer();
-      if(data === false) {
-        d3.json("/api/incidents?lim="+limit+"&start="+date+"&end="+(date+1), function(result) {
-          data = result;
-
-          deferred.resolve(data);
-        });
-      }else{
-        deferred.resolve(data);
-      }
+      $http.get("/api/incidents?lim="+limit+"&start="+date+"&end="+(date+1)).success(function(result) {
+        deferred.resolve(result);
+      });
       return deferred.promise;
     }
 
+    function minDate() {
+      var deferred = $q.defer();
+      $http.get("/api/mindate").success(function(result) {
+        deferred.resolve(data);
+      }).error(function(error) {
+        console.log(error);
+        deferred.resolve(null);
+      });
+      return deferred.promise;
+    }
+      
     // Public API here
     return {
-      getIncidents: getIncidents
+      getIncidents: getIncidents,
+      minDate: minDate
     };
   });

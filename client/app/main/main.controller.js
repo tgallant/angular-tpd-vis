@@ -3,72 +3,6 @@
 angular.module('angularTpdVisApp')
 .controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
 
-  var appendOrdinalHorizontalLegend = function(node, labels, params) {
-  // Default parameters.
-  var p =
-  {
-    xoffset         : 10,
-    yoffset         : 20,
-    cellWidth       : 30,
-    cellHeight      : 20,
-    tickLength      : 25,
-    caption         : "Legend",
-    palette         : d3.scale.category20c(),
-    captionFontSize : 14,
-    captionXOffset  : 0,
-    captionYOffset  : -6
-  };
-
-  // If we have parameters, override the defaults.
-  if (params !== 'undefined')
-  {
-    for (var prop in params)
-    {
-      p[prop] = params[prop];
-    }
-  }
-
-  // Create our x scale
-  var x = d3.scale.ordinal()
-  .domain(labels)
-  .range(d3.range(labels.length).map(function(i) { return i * p.cellWidth; }));
-
-  // Create the x axis.
-  var xAxis = d3.svg.axis()
-  .scale(x)
-  .orient("bottom")
-  .tickSize(p.tickLength)
-  .tickPadding(10)
-  .tickValues(labels)
-  .tickFormat(function(d) { return d; });
-
-  // Append a graphics node to the supplied svg node.
-  var g = node.append("g")
-  .attr("class", "key")
-  .attr("transform", "translate(" + p.xoffset + "," + p.yoffset + ")");
-
-  // Draw a colored rectangle for each ordinal range.
-  g.selectAll("rect")
-  .data(labels)
-  .enter().append("rect")
-  .attr("height", p.cellHeight)
-  .attr("x", function(d, i) { return x(i); })
-  .attr("y", 0)
-  .attr("width", function(d) { return p.cellWidth; })
-  .style("fill", function(d, i)
-  {
-    return p.palette(i);
-  });
-
-  // Add the caption.
-  g.call(xAxis).append("text")
-  .attr("class", "caption")
-  .attr("y", p.captionYOffset)
-  .attr("x", p.captionXOffset)
-  .text(p.caption)
-  .style("font-size", p.captionFontSize);
-}
-
 var colorScale = d3.scale.category20().domain(
   [
   "ACCIDENT",
@@ -89,9 +23,10 @@ var colorScale = d3.scale.category20().domain(
   "TRANSPORT WORKED",
   "ERROR/SHELL NOT NEEDED"
   ]);
-appendOrdinalHorizontalLegend(d3.select("body"), colorScale.domain());
 
-// var minDate = 
+var minDate = incidents.minDate();
+console.log(minDate);
+
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
     var overlay = new maps.OverlayView();
