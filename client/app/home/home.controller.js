@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-  .controller('HomeCtrl', function ($scope) {
+  .controller('HomeCtrl', function ($scope, $rootScope) {
+
+    $rootScope.date = "";
     $scope.message = 'Hello';
     $scope.awesomeThings = [
     {

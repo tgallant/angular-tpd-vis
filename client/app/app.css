@@ -37,3 +37,8 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+#navBarDate {
+    font-weight: bold;
+    font-size: 20px;
+}

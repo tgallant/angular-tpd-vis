@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('Temp1Ctrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
+.controller('Temp1Ctrl', function ($scope, $http, $location, $rootScope, socket, uiGmapGoogleMapApi, incidents) {
 
 var colorScale = d3.scale.category20().domain(
   [
@@ -70,6 +70,7 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("dy", ".31em")
           .text(function(d) { return d.CSDISPDESC; });
 
+	  $rootScope.date = dateRept.format("LL");
           function transform(d, i) {
             d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
             d = projection.fromLatLngToDivPixel(d);
@@ -80,6 +81,7 @@ uiGmapGoogleMapApi.then(function(maps) {
         };
       };
       overlay.setMap(map);
+      if($location.url() !== '/temp1') return;
       setTimeout(function() { 
         incidents.getIncidents(10000, dateRept.add(1, 'days').format())
           .then(function(data) { 
