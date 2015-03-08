@@ -40,8 +40,7 @@ angular.module('angularTpdVisApp')
             var projection = this.getProjection(),
             padding = 10;
 
-            center = {latitude: 32.2317, longitude: -110.9519};
-            
+            var center = {latitude: 32.2317, longitude: -110.9519};
 
             var marker = layer.selectAll("svg")
             .data(data)
