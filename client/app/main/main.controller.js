@@ -24,17 +24,16 @@ var colorScale = d3.scale.category20().domain(
   "ERROR/SHELL NOT NEEDED"
   ]);
 
-var minDate = incidents.minDate();
-console.log(minDate);
 
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
     var overlay = new maps.OverlayView();
 
-    function processData(map, data, overlay) {
+    function processData(map, data, overlay, dateRept) {
+      console.log(data.length);
 
       overlay.onAdd = function() {
-        var layer = d3.select(overlay.getPanes().overlayLayer).append("div")
+        var layer = d3.select(overlay.getPanes().overlayMouseTarget).append("div")
         .attr("class", "stations");
 
         overlay.draw = function() {
@@ -52,12 +51,17 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("r", 2)
           .attr("cx", padding)
           .attr("cy", padding)
-          .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
-          .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
-          .transition().duration(5000)
-          .style("opacity", 0);
+          //.attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
+          //.attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
+          .attr("fill", "red")
+          .attr("stroke", "red")
+          .style("opacity", 0)
+          .transition().delay(function(d, i) { return i/data.length; }).duration(5000)
+          .style("opacity", 1)
+          .transition().duration(15000)
+          .style("opacity", 0.0);
           
-          marker.transition().duration(5000).remove();
+          marker.transition().duration(20000).remove();
 
           marker.append("svg:text")
           .attr("x", padding + 7)
@@ -75,9 +79,18 @@ uiGmapGoogleMapApi.then(function(maps) {
         };
       };
       overlay.setMap(map);
-      setTimeout(function() { incidents.getIncidents(1000, "2015-01-01"/*minDate+1*/).then(function(data) { processData(map, data, new maps.OverlayView()); }); }, 5000);
+      setTimeout(function() { 
+        incidents.getIncidents(10000, dateRept.add(1, 'days').format())
+          .then(function(data) { 
+            processData(map, data, new maps.OverlayView(), dateRept); 
+          }); 
+        }, 1000);
     };
-    incidents.getIncidents(1000, "2015-01-01"/*minDate*/).then(function(data) { processData(map, data, overlay); });
+    incidents.minDate().then(function(minDate) {
+      incidents.getIncidents(10000, minDate[0].DATE_REPT).then(function(data) { 
+        processData(map, data, overlay, moment(minDate[0].DATE_REPT)); 
+      })
+    });
 };
 
 $scope.map =

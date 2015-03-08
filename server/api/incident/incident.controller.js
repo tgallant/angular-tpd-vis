@@ -35,10 +35,10 @@ exports.index = function(req, res, next) {
 };
 exports.interval = function(req, res){
   var lim = req.query.lim;
-  console.log(req.query.lim);
   if(!req.query.lim){
     lim = req.query.lim;
   }
+  console.log(new Date(req.query.start), new Date(req.query.end));
   Incident.find( {"DATE_REPT": {"$gte": new Date(req.query.start), "$lte": new Date(req.query.end)}})
   .limit(lim)
   .exec(function(err, incident){

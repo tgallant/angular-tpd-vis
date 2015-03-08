@@ -5,7 +5,8 @@ angular.module('angularTpdVisApp')
 
     function getIncidents (limit, date) {
       var deferred = $q.defer();
-      $http.get("/api/incidents?lim="+limit+"&start="+date+"&end="+(date+1)).success(function(result) {
+      var newdate = moment(date).add(1, 'days').format();
+      $http.get("/api/incidents?lim="+limit+"&start="+date+"&end="+newdate).success(function(result) {
         deferred.resolve(result);
       });
       return deferred.promise;
@@ -14,10 +15,7 @@ angular.module('angularTpdVisApp')
     function minDate() {
       var deferred = $q.defer();
       $http.get("/api/mindate").success(function(result) {
-        deferred.resolve(data);
-      }).error(function(error) {
-        console.log(error);
-        deferred.resolve(null);
+        deferred.resolve(result);
       });
       return deferred.promise;
     }
