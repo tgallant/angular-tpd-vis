@@ -33,7 +33,20 @@ exports.index = function(req, res, next) {
     });
   });
 };
-
+exports.interval = function(req, res){
+  var lim = req.query.lim;
+  console.log(req.query.lim);
+  if(!req.query.lim){
+    lim = 2;
+  }
+  Incident.find( {"DATE_OCCU": {"$gte": new Date(req.query.start), "$lte": new Date(req.query.end)}})
+  .limit(lim)
+  .exec(function(err, incident){
+    if(err) { return handleError(res, err);}
+    if(!incident) {return res.send(404); }
+    return res.json(incident);
+  });
+};
 // Get a single incident
 exports.show = function(req, res) {
   Incident.findById(req.params.id, function (err, incident) {

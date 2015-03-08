@@ -27,15 +27,21 @@ myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
     ['NHA_NAME', 'Neigborhood Name'], ];
     $scope.things = [];
 
-    $http.get('/api/incidents?limit=10000&all=true')
+    var settings = {
+        start: "2015-01-26",
+        end: "2015-01-27",
+        lim: 30
+    }
+    $http.get('/api/incidents?start=' + settings.start + '&end=' + settings.end + '&lim=' +settings.lim)
     .success(function(data, status, headers, config){
-    	$scope.things = data.data;
-
-    	console.log($scope.things);
+        console.log(data);
+    	$scope.things = data;
     })
     .error(function(data, status, headers, config){
     	alert(status);
     });
+
+
 
 }]);
 
