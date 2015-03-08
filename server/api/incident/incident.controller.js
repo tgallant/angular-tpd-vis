@@ -90,6 +90,15 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.minDate = function(req, res) {
+  Incident.find()
+  .limit(1)
+  .sort('DATE_OCCU', 'descending')
+  .exec(function(err,minDate) {
+    return res.json(200, minDate);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }
