@@ -10,7 +10,6 @@ angular.module('angularTpdVisApp')
         d3.json("/api/incidents?limit="+limit, function(result) {
           data = result;
 
-          console.log(data);
           deferred.resolve(data);
         });
       }else{
