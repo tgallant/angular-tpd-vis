@@ -1,7 +1,9 @@
 'use strict';
 var myModule = angular.module('angularTpdVisApp');
 
-myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
+myModule.controller('TableCtrl', ['$scope', '$location', '$filter', '$http', function ($scope, $location, $filter, $http) {
+
+    $scope.queryVars = $location.search();
 
     //remove to the real data holder
     $scope.removeItem = function removeItem(row) {
@@ -32,16 +34,25 @@ myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
         end: "2015-01-27",
         lim: 30
     }
-    $http.get('/api/incidents?start=' + settings.start + '&end=' + settings.end + '&lim=' +settings.lim)
-    .success(function(data, status, headers, config){
-        console.log(data);
-    	$scope.things = data;
-    })
-    .error(function(data, status, headers, config){
-    	alert(status);
-    });
+    if($scope.queryVars.key) {
+        $http.get('/api/incidents/' + $scope.queryVars.key)
+        .success(function(data, status, headers, config){
+            console.log($scope.queryVars.key);
+            $scope.things = data;
+        })
+        .error(function(data, status, headers, config){
+           alert(status);
+       });
+    }
+    else {
 
-
-
+        $http.get('/api/incidents?start=' + settings.start + '&end=' + settings.end + '&lim=' +settings.lim)
+        .success(function(data, status, headers, config){
+         $scope.things = data;
+     })
+        .error(function(data, status, headers, config){
+           alert(status);
+       });
+    }
 }]);
 
