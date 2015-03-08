@@ -27,7 +27,7 @@ myModule.controller('TableCtrl', ['$scope', '$http', function ($scope, $http) {
     ['NHA_NAME', 'Neigborhood Name'], ];
     $scope.things = [];
 
-    $http.get('/api/incidents?limit=10000')
+    $http.get('/api/incidents?limit=10000&all=true')
     .success(function(data, status, headers, config){
     	$scope.things = data.data;
 

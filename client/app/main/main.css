@@ -1,6 +1,10 @@
+#wraper-r {
+  position: relative;
+  margin-top: 200;
+}
 .angular-google-map-container {
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 0;
     bottom: 0;
     right: 0;
