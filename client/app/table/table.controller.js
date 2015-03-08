@@ -33,7 +33,7 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
     var settings = {
         start: "2015-01-26",
         end: "2015-01-27",
-        lim: 30
+        lim: 2000
     }
     if($scope.queryVars.key) {
         $http.get('/api/incidents/' + $scope.queryVars.key)
