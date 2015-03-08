@@ -8,12 +8,16 @@ angular.module('angularTpdVisApp')
       'link': '/home'
     },
     {
-      'title': 'Map',
+      'title': 'Table',
+      'link': '/table'
+    },
+    {
+      'title': 'Time Lapse',
       'link': '/'
     },
     {
-      'title': 'Table',
-      'link': '/table'
+      'title': 'Traffic',
+      'link': '/temp1'
     }
     ];
 

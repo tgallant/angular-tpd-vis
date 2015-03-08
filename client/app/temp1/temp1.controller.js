@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
+.controller('Temp1Ctrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
 
 var colorScale = d3.scale.category20().domain(
   [
@@ -32,6 +32,7 @@ uiGmapGoogleMapApi.then(function(maps) {
     function processData(map, data, overlay, dateRept) {
       console.log(data.length);
 
+      data = data.filter(function(e) { return e.CSDISPDESC === "TRAFFIC CITATION"; });
       overlay.onAdd = function() {
         var layer = d3.select(overlay.getPanes().overlayMouseTarget).append("div")
         .attr("class", "stations");
@@ -51,21 +52,19 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("r", 2)
           .attr("cx", padding)
           .attr("cy", padding)
-          //.attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
-          //.attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
-          .attr("fill", "red")
-          .attr("stroke", "red")
+//          .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
+ //         .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
+          .attr("fill", "blue")
+          .attr("stroke", "blue")
           .style("opacity", 0)
           .transition().delay(function(d, i) { return i/data.length; }).duration(5000)
           .style("opacity", 1)
           .transition().duration(15000)
           .style("opacity", 0.0);
           
-          layer.transition().duration(20000).remove();
+          marker.transition().duration(20000).remove();
 
-          marker.append("svg:a")
-          .attr("xlink:href", "www.google.com")
-          .append("svg:text")
+          marker.append("svg:text")
           .attr("x", padding + 7)
           .attr("y", padding)
           .attr("dy", ".31em")
