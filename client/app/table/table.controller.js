@@ -1,8 +1,9 @@
 'use strict';
 var myModule = angular.module('angularTpdVisApp');
 
-myModule.controller('TableCtrl', ['$scope', '$location', '$filter', '$http', function ($scope, $location, $filter, $http) {
+myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter', '$http', function ($scope, $location, $rootScope, $filter, $http) {
 
+    $rootScope.date = "";
     $scope.queryVars = $location.search();
 
     //remove to the real data holder
@@ -32,7 +33,7 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$filter', '$http', fun
     var settings = {
         start: "2015-01-26",
         end: "2015-01-27",
-        lim: 30
+        lim: 2000
     }
     if($scope.queryVars.key) {
         $http.get('/api/incidents/' + $scope.queryVars.key)

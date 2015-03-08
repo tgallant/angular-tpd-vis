@@ -41,3 +41,7 @@
 .container .content p {
     font-size: 17px;
 }
+#navBarDate {
+    font-weight: bold;
+    font-size: 20px;
+}

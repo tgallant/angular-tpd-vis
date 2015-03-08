@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-.controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi, incidents) {
+.controller('MainCtrl', function ($scope, $http, $location, $rootScope, socket, uiGmapGoogleMapApi, incidents) {
 
 var colorScale = d3.scale.category20().domain(
   [
@@ -24,12 +24,12 @@ var colorScale = d3.scale.category20().domain(
   "ERROR/SHELL NOT NEEDED"
   ]);
 
-
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
     var overlay = new maps.OverlayView();
 
     function processData(map, data, overlay, dateRept) {
+      console.log(data.length);
 
       overlay.onAdd = function() {
         var layer = d3.select(overlay.getPanes().overlayMouseTarget).append("div")
@@ -57,10 +57,10 @@ uiGmapGoogleMapApi.then(function(maps) {
           .style("opacity", 0)
           .transition().delay(function(d, i) { return i/data.length; }).duration(5000)
           .style("opacity", 1)
-          .transition().duration(15000)
+          .transition().duration(10000)
           .style("opacity", 0.0);
           
-          layer.transition().duration(20000).remove();
+          layer.transition().duration(15000).remove();
 
           marker.append("svg:a")
           .attr("xlink:href", "www.google.com")
@@ -70,6 +70,7 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("dy", ".31em")
           .text(function(d) { return d.CSDISPDESC === "None" ? "" : d.CSDISPDESC; });
 
+	  $rootScope.date = dateRept.format("LL");
           function transform(d, i) {
             d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
             d = projection.fromLatLngToDivPixel(d);
@@ -80,6 +81,7 @@ uiGmapGoogleMapApi.then(function(maps) {
         };
       };
       overlay.setMap(map);
+      if($location.url() !== '/main') return;
       setTimeout(function() { 
         incidents.getIncidents(10000, dateRept.add(1, 'days').format())
           .then(function(data) { 

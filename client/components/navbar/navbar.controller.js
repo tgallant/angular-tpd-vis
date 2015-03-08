@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularTpdVisApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location) {
     $scope.menu = [
     {
       'title': 'Home',
