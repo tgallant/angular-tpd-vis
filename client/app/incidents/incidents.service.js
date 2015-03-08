@@ -4,10 +4,10 @@ angular.module('angularTpdVisApp')
   .factory('incidents', function ($http, $q) {
     var data = false;
 
-    function getIncidents (limit) {
+    function getIncidents (limit, date) {
       var deferred = $q.defer();
       if(data === false) {
-        d3.json("/api/incidents?limit="+limit, function(result) {
+        d3.json("/api/incidents?limit="+limit+"&start="+date+"&end="+(date+1), function(result) {
           data = result;
 
           deferred.resolve(data);

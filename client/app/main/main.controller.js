@@ -91,19 +91,20 @@ var colorScale = d3.scale.category20().domain(
   ]);
 appendOrdinalHorizontalLegend(d3.select("body"), colorScale.domain());
 
+// var minDate = 
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
-    incidents.getIncidents(500).then(function(data) {
+    var overlay = new maps.OverlayView();
+
+    function processData(map, data, overlay) {
       data = data.data;
 
-      var overlay = new maps.OverlayView();
-
       overlay.onAdd = function() {
-        var layer = d3.select(this.getPanes().overlayLayer).append("div")
+        var layer = d3.select(overlay.getPanes().overlayLayer).append("div")
         .attr("class", "stations");
 
         overlay.draw = function() {
-          var projection = this.getProjection(),
+          var projection = overlay.getProjection(),
           padding = 10;
 
           var marker = layer.selectAll("svg")
@@ -111,33 +112,38 @@ uiGmapGoogleMapApi.then(function(maps) {
           .each(transform)
           .enter().append("svg:svg")
           .each(transform)
-          .attr("class", "marker");
+          .attr("class", "marker1");
 
           marker.append("svg:circle")
           .attr("r", 2)
           .attr("cx", padding)
           .attr("cy", padding)
           .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
-          .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); });
+          .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
+          .transition().duration(5000)
+          .style("opacity", 0);
+          
+          marker.transition().duration(5000).remove();
 
           marker.append("svg:text")
           .attr("x", padding + 7)
           .attr("y", padding)
           .attr("dy", ".31em");
-          //.text(function(d) { return d.CSDISPDESC; });
+          .text(function(d) { return d.CSDISPDESC; });
 
-          function transform(d) {
+          function transform(d, i) {
             d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
             d = projection.fromLatLngToDivPixel(d);
             return d3.select(this)
             .style("left", (d.x - padding) + "px")
             .style("top", (d.y - padding) + "px");
           };
-          console.log(d3.selectAll("circle"));
         };
       };
       overlay.setMap(map);
-    });
+      setTimeout(function() { incidents.getIncidents(1000/*,minDate + 1*/).then(function(data) { processData(map, data, new maps.OverlayView()); }); }, 5000);
+    };
+    incidents.getIncidents(1000/*, minDate*/).then(function(data) { processData(map, data, overlay); });
 };
 
 $scope.map =
@@ -151,13 +157,8 @@ $scope.map =
     tilesloaded: function (map) {
       makeOverlay(map);
     }
-  }
+  },
 };
-
-setInterval(function() {
-    d3.selectAll("circle").style("opacity", 1);
-    d3.selectAll("circle").transition().duration(4900).style("opacity", .1);
-}, 5000);
 
 $scope.mapStyles = [
 {
