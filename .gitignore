@@ -4,3 +4,6 @@ public
 .idea
 client/bower_components
 dist
+setup/logs
+setup/incidents.csv
+setup/header.txt
