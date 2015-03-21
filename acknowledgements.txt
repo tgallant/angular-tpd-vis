@@ -1,2 +1,0 @@
-PyProj - converting x,y to lat, lon
-City of Tucson - Neat 
