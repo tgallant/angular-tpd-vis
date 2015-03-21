@@ -1,15 +1,7 @@
 LOG=logs/$(date +%h-%d-%y_%H:%M).incidents.log
 
 #Check dependencies.
-if ! which python > /dev/null ; then
-    echo "Need an installation of python. Try"
-    echo "sudo apt-get install python"
-    exit 1
-elif ! python -c "import pyproj" >& /dev/null ; then
-    echo "Need to install pyproj. Try"
-    echo "sudo pip install pyproj"
-    exit 1
-elif ! which dos2unix >/dev/null ; then
+if ! which dos2unix >/dev/null ; then
     echo "Need an installation of dos2unix. Try"
     echo "sudo apt-get install dos2unix"
     exit 1
