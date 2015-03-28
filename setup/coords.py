@@ -62,10 +62,17 @@ def main():
         f = sys.stdin
 
     names = headerMap.long_names
+    types = headerMap.types
     header = f.readline().strip()
-    header = "\n".join(names[s.strip()] for s in header.split(","))
+    headerNames = "\n".join(names[s.strip()] for s in header.split(","))
+    headerWithTypes = ",\n".join("   " + names[s.strip()] + ": " + types[s.strip()] for s in header.split(","))
     with open("header.txt", "w") as headerFile:
-        headerFile.write(header + "\n")
+        headerFile.write(headerNames + "\n")
+    with open("header.js", "w") as headerFile:
+        headerFile.write("module.exports = {\n")
+        headerFile.write(headerWithTypes)
+        headerFile.write("\n}\n")
+
 
     translateBody(f)
     return 0

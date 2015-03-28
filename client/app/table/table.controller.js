@@ -14,20 +14,20 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
     	}
     }
     $scope.tableHeaders = [	
-    ['ADDRESS_PUBLIC', 'Public Address'], 
-    ['DATE_REPT', 'Date Rported'], 
-    ['HOUR_REPT', 'Hour Reported'], 
-    ['DATE_OCCU', 'Date Occcured'], 
-    ['HOUR_OCCU', 'Hour Occured'], 
-    ['NatureCodeDesc', 'Code Description'], 
-    ['CSDISPDESC', 'Description of Disp. Code'], 
-    ['ACTDATE', 'Actual Date'], 
-    ['ACTTIME', 'Actual Time'], 
-    ['ADD_NS', 'North South Address'], 
-    ['ADD_DIR_NS', 'N/S Address Number'], 
-    ['ADD_EW', 'East West Address'], 
-    ['ADD_DIR_EW', 'E/W Address Number'], 
-    ['NHA_NAME', 'Neigborhood Name'], ];
+    ['address', 'Public Address'], 
+    ['date_reported', 'Date Rported'], 
+    ['hour_reported', 'Hour Reported'], 
+    ['date_occurred', 'Date Occcured'], 
+    ['hour_occurred', 'Hour Occured'], 
+    ['event_type_description', 'Code Description'], 
+    ['service_call_description', 'Description of Disp. Code'], 
+    ['ACTDATE_unknown', 'Actual Date'], 
+    ['ACTTIME_unknown', 'Actual Time'], 
+    ['address_NS_num', 'North South Address'], 
+    ['address_NS_dir', 'N/S Address Number'], 
+    ['address_EW_num', 'East West Address'], 
+    ['address_EW_dir', 'E/W Address Number'], 
+    ['neighborhood_name', 'Neigborhood Name'], ];
     $scope.things = [];
 
     var settings = {

@@ -7,7 +7,7 @@ var Incident = require('../incident/incident.model');
 exports.index = function(req, res) {
   Incident.find()
   .limit(1)
-  .sort([['DATE_REPT', 'ascending']])
+  .sort([['date_reported', 'ascending']])
   .exec(function(err,minDate) {
     return res.json(200, minDate);
   });

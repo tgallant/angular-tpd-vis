@@ -12,44 +12,30 @@
 		</tr>
 		<tr>
 			<th></th>
-			<th><input st-search="'ADDRESS_PUBLIC'" class="form-control" placeholder="{{tableHeaders[0][1]}}" type="text" /></th>
-			<th><input st-search="'DATE_REPT'" class="form-control" placeholder="{{tableHeaders[1][1]}}" type="text" /></th>
-			<th><input st-search="'HOUR_REPT'" class="form-control" placeholder="{{tableHeaders[2][1]}}" type="text" /></th>
-			<th><input st-search="'DATE_OCCU'" class="form-control" placeholder="{{tableHeaders[3][1]}}" type="text" /></th>
-			<th><input st-search="'HOUR_OCCU'" class="form-control" placeholder="{{tableHeaders[4][1]}}" type="text" /></th>
-			<th><input st-search="'NatureCodeDesc'" class="form-control" placeholder="{{tableHeaders[5][1]}}" type="text" /></th>
-			<th><input st-search="'CSDISPDESC'" class="form-control" placeholder="{{tableHeaders[6][1]}}" type="text" /></th>
-			<th><input st-search="'ACTDATE'" class="form-control" placeholder="{{tableHeaders[7][1]}}" type="text" /></th>
-			<th><input st-search="'ACTTIME'" class="form-control" placeholder="{{tableHeaders[8][1]}}" type="text" /></th>
-			<th><input st-search="'ADD_NS'" class="form-control" placeholder="{{tableHeaders[9][1]}}" type="text" /></th>
-			<th><input st-search="'AADD_DIR_NS'" class="form-control" placeholder="{{tableHeaders[10][1]}}" type="text" /></th>
-			<th><input st-search="'ADD_EW'" class="form-control" placeholder="{{tableHeaders[11][1]}}" type="text" /></th>
-			<th><input st-search="'ADD_DIR_EW'" class="form-control" placeholder="{{tableHeaders[12][1]}}" type="text" /></th>
-			<th><input st-search="'NHA_NAME'" class="form-control" placeholder="{{tableHeaders[13][1]}}" type="text" /></th>
+                        <th><input st-search="'address'" class="form-control" placeholder="{{tableHeaders[0][1]}}" type="text" /></th>
+                        <th><input st-search="'date_reported'" class="form-control" placeholder="{{tableHeaders[1][1]}}" type="text" /></th>
+                        <th><input st-search="'hour_reported'" class="form-control" placeholder="{{tableHeaders[2][1]}}" type="text" /></th>
+                        <th><input st-search="'date_occurred'" class="form-control" placeholder="{{tableHeaders[3][1]}}" type="text" /></th>
+                        <th><input st-search="'hour_occurred'" class="form-control" placeholder="{{tableHeaders[4][1]}}" type="text" /></th>
+                        <th><input st-search="'event_type_description'" class="form-control" placeholder="{{tableHeaders[5][1]}}" type="text" /></th>
+                        <th><input st-search="'service_call_description'" class="form-control" placeholder="{{tableHeaders[6][1]}}" type="text" /></th>
+                        <th><input st-search="'ACTDATE_unknown'" class="form-control" placeholder="{{tableHeaders[7][1]}}" type="text" /></th>
+                        <th><input st-search="'ACTTIME_unknown'" class="form-control" placeholder="{{tableHeaders[8][1]}}" type="text" /></th>
+                        <th><input st-search="'address_NS_num'" class="form-control" placeholder="{{tableHeaders[9][1]}}" type="text" /></th>
+                        <th><input st-search="'address_NS_dir'" class="form-control" placeholder="{{tableHeaders[10][1]}}" type="text" /></th>
+                        <th><input st-search="'address_EW_num'" class="form-control" placeholder="{{tableHeaders[11][1]}}" type="text" /></th>
+                        <th><input st-search="'address_EW_dir'" class="form-control" placeholder="{{tableHeaders[12][1]}}" type="text" /></th>
+                        <th><input st-search="'neighborhood_name'" class="form-control" placeholder="{{tableHeaders[13][1]}}" type="text" /></th>
+
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="row in displayedCollection" >
 			<td>{{$index+1}}</td>
-			<td>{{row.ADDRESS_PUBLIC}}</td>
-			<td>{{row.DATE_REPT | date}}</td>
-			<td>{{row.HOUR_REPT}}</td>
-			<td>{{row.DATE_OCCU | date}}</td>
-			<td>{{row.HOUR_OCCU}}</td>
-			<td>{{row.NatureCodeDesc}}</td>
-			<td>{{row.CSDISPDESC}}</td>
-			<td>{{row.ACTDATE | date}}</td>
-			<td>{{row.ACTTIME}}</td>
-			<td>{{row.ADD_NS}}</td>
-			<td>{{row.ADD_DIR_NS}}</td>
-			<td>{{row.ADD_EW}}</td>
-			<td>{{row.ADD_DIR_EW}}</td>
-			<td>{{row.NHA_NAME}}</td>
-
+                        <td ng-repeat="field in tableHeaders">{{row[field[0]]}}</td>
 			<td>
 				<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-					<i class="glyphicon glyphicon-remove-circle">
-					</i>
+					<i class="glyphicon glyphicon-remove-circle"></i>
 				</button>
 			</td>
 		</tr>

@@ -3,28 +3,6 @@
 angular.module('angularTpdVisApp')
 .controller('Temp1Ctrl', function ($scope, $http, $location, $rootScope, socket, uiGmapGoogleMapApi, incidents) {
 
-var colorScale = d3.scale.category20().domain(
-  [
-  "ACCIDENT",
-  "FOR DISPACCADVEV",
-  "INCIDENT",
-  "FOR DISPASSNCASE",
-  "SUPPLEMENT",
-  "INCIDENT/ARREST",
-  "CRIMESCENE WORKED",
-  "INCIDENT/ACCIDENT",
-  "ACCIDENT",
-  "FIELD INTERVIEW",
-  "MISC INCIDENT",
-  "TRAFFIC CITATION",
-  "NO PAPERWORK",
-  "FALSE ALARM",
-  "CITATION ARREST",
-  "TRANSPORT WORKED",
-  "ERROR/SHELL NOT NEEDED"
-  ]);
-
-
 uiGmapGoogleMapApi.then(function(maps) {
   var makeOverlay = function(map) {
     var overlay = new maps.OverlayView();
@@ -32,7 +10,8 @@ uiGmapGoogleMapApi.then(function(maps) {
     function processData(map, data, overlay, dateRept) {
       console.log(data.length);
 
-      data = data.filter(function(e) { return e.CSDISPDESC === "TRAFFIC CITATION"; });
+      data = data.filter(function(e) { return e.service_call_description === "TRAFFIC CITATION"; });
+      console.log(data.length);
       overlay.onAdd = function() {
         var layer = d3.select(overlay.getPanes().overlayMouseTarget).append("div")
         .attr("class", "stations");
@@ -52,8 +31,6 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("r", 2)
           .attr("cx", padding)
           .attr("cy", padding)
-//          .attr("fill", function(d) { return colorScale(d.CSDISPDESC); })
- //         .attr("stroke", function(d) { return colorScale(d.CSDISPDESC); })
           .attr("fill", "blue")
           .attr("stroke", "blue")
           .style("opacity", 0)
@@ -72,7 +49,7 @@ uiGmapGoogleMapApi.then(function(maps) {
 
 	  $rootScope.date = dateRept.format("LL");
           function transform(d, i) {
-            d = new maps.LatLng(d.LATITUDE, d.LONGITUDE);
+            d = new maps.LatLng(d.latitude, d.longitude);
             d = projection.fromLatLngToDivPixel(d);
             return d3.select(this)
             .style("left", (d.x - padding) + "px")
@@ -90,8 +67,8 @@ uiGmapGoogleMapApi.then(function(maps) {
         }, 1000);
     };
     incidents.minDate().then(function(minDate) {
-      incidents.getIncidents(10000, minDate[0].DATE_REPT).then(function(data) { 
-        processData(map, data, overlay, moment(minDate[0].DATE_REPT)); 
+      incidents.getIncidents(10000, minDate[0].date_reported).then(function(data) { 
+        processData(map, data, overlay, moment(minDate[0].date_reported)); 
       })
     });
 };

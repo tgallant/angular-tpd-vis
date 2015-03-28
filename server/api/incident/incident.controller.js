@@ -17,9 +17,9 @@ exports.index = function(req, res, next) {
     for(var x = 0; x < incidents.length; x++) {
       var incident = {};
       incident._id = incidents[x]._id;
-      incident.LONGITUDE = incidents[x].LONGITUDE;
-      incident.LATITUDE = incidents[x].LATITUDE;
-      incident.CSDISPDESC = incidents[x].CSDISPDESC;
+      incident.longitude = incidents[x].longitude;
+      incident.latitude = incidents[x].latitude;
+      incident.service_call_description = incidents[x].service_call_description;
       resArray.push(incident);
     }
 
@@ -40,7 +40,7 @@ exports.interval = function(req, res){
     lim = req.query.lim;
   }
   console.log(new Date(req.query.start), new Date(req.query.end));
-  Incident.find( {"DATE_REPT": {"$gte": new Date(req.query.start), "$lte": new Date(req.query.end)}})
+  Incident.find( {"date_reported": {"$gte": new Date(req.query.start), "$lte": new Date(req.query.end)}})
   .limit(lim)
   .exec(function(err, incident){
     if(err) { return handleError(res, err);}
@@ -94,7 +94,7 @@ exports.destroy = function(req, res) {
 exports.minDate = function(req, res) {
   Incident.find()
   .limit(1)
-  .sort('DATE_OCCU', 'descending')
+  .sort('date_occurred', 'descending')
   .exec(function(err,minDate) {
     return res.json(200, minDate);
   });
