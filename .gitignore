@@ -7,3 +7,5 @@ dist
 setup/header.txt
 setup/incidents.csv
 setup/TPD_Incidents_45Day.zip
+*.log
+*.pyc
