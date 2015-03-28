@@ -4,6 +4,6 @@ public
 .idea
 client/bower_components
 dist
-setup/logs/*
-setup/incidents.csv
 setup/header.txt
+setup/incidents.csv
+setup/TPD_Incidents_45Day.zip
