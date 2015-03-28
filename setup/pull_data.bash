@@ -16,7 +16,7 @@ fi
 unzip -o TPD_Incidents_45Day.zip tpd_100blk_incid.csv
 dos2unix -f tpd_100blk_incid.csv
 
-python coords.py -v < tpd_100blk_incid.csv > incidents.csv 2>> $LOG
+python -B coords.py -v < tpd_100blk_incid.csv > incidents.csv 2>> $LOG
 rm tpd_100blk_incid.csv 
 
 exit 0
