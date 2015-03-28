@@ -3,7 +3,7 @@ var myModule = angular.module('angularTpdVisApp');
 
 myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter', '$http', function ($scope, $location, $rootScope, $filter, $http) {
 
-    $rootScope.date = "";
+    $rootScope.date = '';
     $scope.queryVars = $location.search();
 
     //remove to the real data holder
@@ -12,7 +12,8 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
     	if (index !== -1) {
     		$scope.things.splice(index, 1);
     	}
-    }
+    };
+
     $scope.tableHeaders = [	
     ['address', 'Public Address'], 
     ['date_reported', 'Date Rported'], 
@@ -31,10 +32,11 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
     $scope.things = [];
 
     var settings = {
-        start: "2015-01-26",
-        end: "2015-01-27",
+        start: '2015-01-26',
+        end: '2015-01-27',
         lim: 2000
-    }
+    };
+
     if($scope.queryVars.key) {
         $http.get('/api/incidents/' + $scope.queryVars.key)
         .success(function(data, status, headers, config){
@@ -42,7 +44,7 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
             $scope.things = data;
         })
         .error(function(data, status, headers, config){
-           alert(status);
+           console.log(status);
        });
     }
     else {
@@ -52,7 +54,7 @@ myModule.controller('TableCtrl', ['$scope', '$location', '$rootScope', '$filter'
          $scope.things = data;
      })
         .error(function(data, status, headers, config){
-           alert(status);
+           console.log(status);
        });
     }
 }]);
