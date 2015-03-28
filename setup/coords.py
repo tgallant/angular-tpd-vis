@@ -3,6 +3,8 @@ import sys
 import csv
 from pyproj import Proj
 
+import headerMap
+
 # Globals
 FEET_TO_METER = 0.3048
 verbose = False
@@ -14,11 +16,10 @@ def printUsage():
         python coords.py FILE [-v]
     """)
 
-# Until we get the column descriptions figured out.
-headerMap = {"X":"LONGITUDE", "Y":"LATITUDE"}
 def translateHeader(header):
     header = header.split(",")
-    header = [headerMap[s] if s in headerMap else s for s in header]
+    names = headerMap.long_names
+    header = [names[s] if s in names else s for s in header]
     header = "\n".join(header)
     return header
 
