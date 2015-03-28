@@ -34,18 +34,12 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("fill", "blue")
           .attr("stroke", "blue")
           .style("opacity", 0)
-          .transition().delay(function(d, i) { return i/data.length; }).duration(5000)
+          .transition().delay(function(d, i) { return i/data.length; }).duration(1000)
           .style("opacity", 1)
-          .transition().duration(15000)
+          .transition().duration(2000)
           .style("opacity", 0.0);
           
-          marker.transition().duration(20000).remove();
-
-          marker.append("svg:text")
-          .attr("x", padding + 7)
-          .attr("y", padding)
-          .attr("dy", ".31em")
-          .text(function(d) { return d.CSDISPDESC; });
+          marker.transition().duration(2000).remove();
 
 	  $rootScope.date = dateRept.format("LL");
           function transform(d, i) {

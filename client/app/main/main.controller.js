@@ -32,20 +32,12 @@ uiGmapGoogleMapApi.then(function(maps) {
           .attr("fill", "red")
           .attr("stroke", "red")
           .style("opacity", 0)
-          .transition().delay(function(d, i) { return i/data.length; }).duration(5000)
+          .transition().delay(function(d, i) { return i/data.length; }).duration(1000)
           .style("opacity", 1)
-          .transition().duration(10000)
+          .transition().duration(2000)
           .style("opacity", 0.0);
           
-          layer.transition().duration(15000).remove();
-
-          marker.append("svg:a")
-          .attr("xlink:href", "www.google.com")
-          .append("svg:text")
-          .attr("x", padding + 7)
-          .attr("y", padding)
-          .attr("dy", ".31em")
-          .text(function(d) { return d.CSDISPDESC === "None" ? "" : d.CSDISPDESC; });
+          layer.transition().duration(2000).remove();
 
 	  $rootScope.date = dateRept.format("LL");
           function transform(d, i) {
